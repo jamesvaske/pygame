@@ -3,7 +3,7 @@ from constants import *
 from player import Player
 from asteroidfield import AsteroidField 
 from asteroids import Asteroid
-from circleshape import Shot
+from shot import Shot
 import sys
 
 def main():
@@ -46,6 +46,13 @@ def main():
             if player.collisions(asteroid):
                 print("Game Over!")
                 sys.exit()
+
+        for asteroid in asteroids:
+            for shot in shots:
+                if shot.collisions(asteroid):
+                    shot.kill()
+                    asteroid.split()
+
         screen.fill("black")
         for sprite in drawable:
             sprite.draw(screen)
